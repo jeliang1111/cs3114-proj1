@@ -48,6 +48,17 @@ public class Database {
         // Delegates the decision mostly to BST, only
         // writing the correct message to the console from
         // that
+    	if(pair.getValue().getxCoordinate() < 0 || pair.getValue().getyCoordinate() < 0) {
+    		//error
+    		System.out.println("Rectangle rejected: (" + pair.getKey() + ", " + pair.getValue().toString() + ")");
+    	}
+    	if(pair.getValue().getxCoordinate() + pair.getValue().getWidth() > 1024 || pair.getValue().getyCoordinate() + pair.getValue().getHeight() > 1024) {
+    		//error
+    		System.out.println("Rectangle rejected: (" + pair.getKey() + ", " + pair.getValue().toString() + ")");
+    	}
+    	//check if the key has invalid characters 
+    	//else add to tree
+    	
 
     }
 

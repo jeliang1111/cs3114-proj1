@@ -110,9 +110,10 @@ public class Rectangle {
      * 
      * @return a human readable string containing information about the
      *         rectangle
+     *         format is "x, y, w, h"
      */
     public String toString() {
-        return null;
+    	return Integer.toString(xCoordinate) + ", " + Integer.toString(yCoordinate) + ", " + Integer.toString(width) + ", " + Integer.toString(height);
     }
 
 
