@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.Stack;
 
 /**
  * Stub for binary search tree class
@@ -42,8 +43,36 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
      */
     @Override
     public Iterator<BSTNode<T>> iterator() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Iterator<BSTNode<T>>(){
+            @Override
+            public boolean hasNext() {
+                return stack.size() > 0;
+            }
+
+            @Override
+            public BSTNode<T> next() {
+                if(!hasNext()) {
+                    return null;
+                }
+                BSTNode<T> node = stack.pop();
+                pushFarthestLeft(node.getRight());
+                return node;
+            }
+            private Stack<BSTNode<T>> stack = new Stack<BSTNode<T>>() {
+                {
+                    pushFarthestLeft(root);
+                }
+            };
+
+            private void pushFarthestLeft(BSTNode<T> node) {
+                while (node != null) {
+                    stack.push(node.getLeft());
+
+                }
+            }
+
+        };
+        }
+        
     }
 
-}

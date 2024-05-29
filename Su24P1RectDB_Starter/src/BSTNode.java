@@ -16,6 +16,14 @@ public class BSTNode<T extends Comparable<T>> {
         this.value = value;
     }
 
+    public BSTNode<T> getLeft() {
+        return left;
+    }
+
+    public BSTNode<T> getRight() {
+        return right;
+    }
+
     // It could be worth including a toString() method for BSTNode for easier
     // debugging!
 
