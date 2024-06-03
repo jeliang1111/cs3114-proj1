@@ -53,7 +53,14 @@ public class CommandProcessor {
         // parameters by converting the string integers into
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
-            // Calls insert
+            if (arr.length != 5) {
+                System.out.println("Invalid number of parameters.");
+                return;
+            }
+            Rectangle rect = new Rectangle(Integer.parseInt(arr[1].trim()),
+                Integer.parseInt(arr[2].trim()), Integer.parseInt(arr[3].trim()),
+                Integer.parseInt(arr[4].trim()));
+            rectDB.insert(new KVPair<String, Rectangle>(arr[1], rect));
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
@@ -62,35 +69,40 @@ public class CommandProcessor {
             int numParam = arr.length - 1;
             if (numParam == 1) {
                 // Calls remove by name
-
+                rectDB.remove(arr[1]);
             }
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string
                 // integers into their Integer equivalent minus whitespace
-
+                rectDB.remove(Integer.parseInt(arr[1].trim()),
+                    Integer.parseInt(arr[2].trim()), Integer.parseInt(arr[3].trim()),
+                    Integer.parseInt(arr[4].trim()));
             }
 
         }
         else if (command.equals("regionsearch")) {
             // calls the regionsearch method for a set of coordinates
             // the string integers in the line will be trimmed of whitespace
-
+            rectDB.regionsearch(Integer.parseInt(arr[1].trim()),
+                Integer.parseInt(arr[2].trim()), Integer.parseInt(arr[3].trim()),
+                Integer.parseInt(arr[4].trim()));
         }
         else if (command.equals("intersections")) {
             // calls the intersections method, no parameters to be passed
             // (see the intersections JavaDoc in the Database class for more
             // information)
+            rectDB.intersections();
 
         }
         else if (command.equals("search")) {
             // calls the search method for a name of object
-
+            rectDB.search(arr[1]);
         }
         else if (command.equals("dump")) {
             // calls the dump method for the database, takes no parameters
             // (see the dump() JavaDoc in the Database class for more
             // information)
-
+            rectDB.dump();
         }
         else {
             // the first white space delimited string in the line is not

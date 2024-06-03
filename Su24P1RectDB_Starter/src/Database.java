@@ -58,7 +58,12 @@ public class Database {
     	}
     	//check if the key has invalid characters 
     	//else add to tree
-    	
+    	// The name must begin with a letter, and may contain letters, digits, and underscore characters
+        if(pair.getKey().matches("^[a-zA-Z][a-zA-Z0-9_]*$")) {
+        	tree.insert(pair);
+        } else {
+        	System.out.println("Rectangle rejected: (" + pair.getKey() + ", " + pair.getValue().toString() + ")");
+        }
 
     }
 

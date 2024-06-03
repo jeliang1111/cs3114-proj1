@@ -22,18 +22,16 @@ public class RectangleDB {
      *
      * @param args
      *            The name of the command file passed in as a command line
-     *            argument.
+     *            argument. The format for using this command is as follows:
+     *            java RectangleDB <command-file>
      */
     public static void main(String[] args) {
 
-        if (args.length < 1) {
-            System.out.println(
-                "Invalid file. No filename in command line arguments");
+        // Check if the command line arguments are correct
+        if (args.length != 1) {
+            System.out.println("Usage: java RectangleDB <command-file>");
             return;
         }
-
-        Database rectDB = new Database();
-        CommandProcessor cmder = new CommandProcessor(rectDB);
 
         // The following pseudocode walks through a possible design for an
         // entrypoint for your rectangledb
@@ -47,8 +45,22 @@ public class RectangleDB {
         // line by line
         // determines if the file has more lines to read
         // close the scanner
-
         // catch the exception if the file cannot be found
         // and output the correct information to the console
+
+        try {
+            File file = new File(args[0]);
+            Scanner scanner = new Scanner(file);
+            Database rectDB = new Database();
+            CommandProcessor commandProcessor = new CommandProcessor(rectDB);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                commandProcessor.processor(line);
+            }
+            scanner.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
     }
 }

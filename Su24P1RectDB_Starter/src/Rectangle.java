@@ -86,8 +86,28 @@ public class Rectangle {
      * @return true if the rectangle intersects with rec, false if not
      */
     public boolean intersect(Rectangle r2) {
-        return false;
-
+        // this rectangle is to the left of r2
+        if (this.xCoordinate + this.width <= r2.getxCoordinate()) {
+            return false;
+        }
+    
+        // this rectangle is to the right of r2
+        if (this.xCoordinate >= r2.getxCoordinate() + r2.getWidth()) {
+            return false;
+        }
+    
+        // this rectangle is above r2
+        if (this.yCoordinate + this.height <= r2.getyCoordinate()) {
+            return false;
+        }
+    
+        // this rectangle is below r2
+        if (this.yCoordinate >= r2.getyCoordinate() + r2.getHeight()) {
+            return false;
+        }
+    
+        // if none of the above conditions are met, the rectangles intersect
+        return true;
     }
 
 
@@ -100,6 +120,11 @@ public class Rectangle {
      *         not
      */
     public boolean equals(Object rec) {
+        if (rec instanceof Rectangle) {
+            Rectangle r = (Rectangle) rec;
+            return this.xCoordinate == r.getxCoordinate() && this.yCoordinate == r.getyCoordinate()
+                && this.width == r.getWidth() && this.height == r.getHeight();
+        }
         return false;
     }
 
@@ -123,6 +148,14 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
+        // Check if any of the parameters are negative
+        if (xCoordinate < 0 || yCoordinate < 0 || width <= 0 || height <= 0)
+            return true;
+        
+        // Check if the rectangle is out of bounds
+        if (xCoordinate + width > 1024 || yCoordinate + height > 1024)
+            return true;
+        
         return false;
     }
 }

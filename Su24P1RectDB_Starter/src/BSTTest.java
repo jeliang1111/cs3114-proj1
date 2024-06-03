@@ -85,6 +85,14 @@ public class BSTTest extends student.TestCase {
          */
     }
 
-    // TODO: implement more tests
+    /**
+     * Tests the basic insert method
+     */
+    public void testInsert() {
+        bst.insert("hello");
+        assertEquals(1, bst.size());
+        bst.insert("world");
+        assertEquals(2, bst.size());
+    }
 
 }

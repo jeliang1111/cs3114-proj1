@@ -78,7 +78,6 @@ public class KVPair<K extends Comparable<K>, V>
      */
     @Override
     public int compareTo(KVPair<K, V> o) {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.key.compareTo(o.getKey());
     }
 }
