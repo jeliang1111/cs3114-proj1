@@ -76,7 +76,16 @@ public class Database {
      *            the name of the rectangle to be removed
      */
     public void remove(String name) {
-
+        Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
+        while(itr.hasNext()) {
+        	BSTNode<KVPair<String, Rectangle>> node = itr.next();
+        	if(node.getValue().getKey().equals(name)) {
+        		tree.remove(node);
+                System.out.println("Rectangle removed: (" + name + ", " + node.getValue().getValue().toString() + ")");
+        		return;
+        	}
+        }
+        System.out.println("Rectangle not found: " + name);
     }
 
 
@@ -94,6 +103,16 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
+        Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
+        while(itr.hasNext()) {
+        	BSTNode<KVPair<String, Rectangle>> node = itr.next();
+        	if(node.getValue().getValue().getxCoordinate() == x && node.getValue().getValue().getyCoordinate() == y && node.getValue().getValue().getWidth() == w && node.getValue().getValue().getHeight() == h) {
+        		tree.remove(node);
+                System.out.println("Rectangle removed: (" + node.getValue().getKey() + ", " + node.getValue().getValue().toString() + ")");
+        		return;
+        	}
+        }
+        System.out.println("Rectangle not found: (" + x + ", " + y + ", " + w + ", " + h + ")");
 
     }
 

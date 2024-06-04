@@ -67,6 +67,43 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
         return node;
     }
 
+    public BSTNode<T> remove(BSTNode<T> node) {
+        
+        return removeHelp(root, node.getValue());
+
+    }
+
+    private BSTNode<T> removeHelp(BSTNode<T> node, T value) {
+        if (node == null) {
+            return null;
+        } else {
+            if (value.compareTo(node.getValue()) < 0) {
+                node.setLeft(removeHelp(node.getLeft(), value));
+            } else if (value.compareTo(node.getValue()) > 0) {
+                node.setRight(removeHelp(node.getRight(), value));
+            } else {
+                if (node.getLeft() == null) {
+                    return node.getRight();
+                } else if (node.getRight() == null) {
+                    return node.getLeft();
+                } else {
+                    BSTNode<T> minNodeForRight = minValueNode(node.getRight());
+                    node.setValue(minNodeForRight.getValue());
+                    node.setRight(removeHelp(node.getRight(), node.getValue()));
+                }
+            }
+        }
+        return node;
+    }
+
+    private BSTNode<T> minValueNode(BSTNode<T> node) {
+        BSTNode<T> current = node;
+        while (current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        return current;
+    }
+
 
     /**
      * This is an auto-generated method stub for an iterator object because we
