@@ -144,6 +144,27 @@ public class Database {
      * Rectangles.
      */
     public void intersections() {
+        System.out.println("Intersection Pairs:");
+        Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
+        while(itr.hasNext()) {
+            BSTNode<KVPair<String, Rectangle>> node = itr.next();
+        	Iterator<BSTNode<KVPair<String, Rectangle>>> itr2 = tree.iterator();
+            while(itr2.hasNext()) {
+                BSTNode<KVPair<String, Rectangle>> node2 = itr2.next();
+            	if(node2 == node) {
+            		continue;
+            	}
+                if(node.getValue().getValue().getxCoordinate() + node.getValue().getValue().getWidth() < node2.getValue().getValue().getxCoordinate() || 
+                node2.getValue().getValue().getxCoordinate() + node2.getValue().getValue().getWidth() < node.getValue().getValue().getxCoordinate() || 
+                node.getValue().getValue().getyCoordinate() + node.getValue().getValue().getHeight() < node2.getValue().getValue().getyCoordinate() || 
+                node2.getValue().getValue().getyCoordinate() + node2.getValue().getValue().getHeight() < node.getValue().getValue().getyCoordinate()) {
+                	continue;
+                }
+                else{
+                    System.out.println("(" + node.getValue().getKey() + ", " + node.getValue().getValue().toString() + ") | (" + node2.getValue().getKey() + ", " + node2.getValue().getValue().toString() + ")");
+                }
+            }
+        }
 
     }
 
@@ -156,6 +177,22 @@ public class Database {
      *            name of the Rectangle to be searched for
      */
     public void search(String name) {
+        Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
+        bool firstFlag = false;
+        while(itr.hasNext()) {
+        	BSTNode<KVPair<String, Rectangle>> node = itr.next();
+        	if(node.getValue().getKey().equals(name)) {
+                if(!firstFlag) {
+                    System.out.println("Rectangles found matching \"" + name + "\": ");
+                    firstFlag = true;
+                }
+                System.out.println("(" + name + ", " + node.getValue().getValue().toString() + ")");
+        	}
+        }
+        if(!firstFlag) {
+            System.out.println("Rectangle not found: " + name);
+        }
+
 
     }
 
@@ -166,6 +203,8 @@ public class Database {
      * will all be delegated to the BST.
      */
     public void dump() {
+        System.out.println("BST dump:");
+        
 
     }
 

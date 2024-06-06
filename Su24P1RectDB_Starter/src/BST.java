@@ -93,7 +93,6 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
                     node.setValue(minNodeForRight.getValue());
                     node.setRight(removeHelp(node.getRight(), minNodeForRight.getValue()));
                 }
-                
             }
         }
         return node;
