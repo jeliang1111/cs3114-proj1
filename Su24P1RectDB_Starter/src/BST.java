@@ -75,6 +75,7 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
 
     private BSTNode<T> removeHelp(BSTNode<T> node, T value) {
         if (node == null) {
+        	System.out.print("Node is null");
             return null;
         } else {
             if (value.compareTo(node.getValue()) < 0) {
@@ -82,6 +83,7 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
             } else if (value.compareTo(node.getValue()) > 0) {
                 node.setRight(removeHelp(node.getRight(), value));
             } else {
+                size--;
                 if (node.getLeft() == null) {
                     return node.getRight();
                 } else if (node.getRight() == null) {
@@ -89,8 +91,9 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
                 } else {
                     BSTNode<T> minNodeForRight = minValueNode(node.getRight());
                     node.setValue(minNodeForRight.getValue());
-                    node.setRight(removeHelp(node.getRight(), node.getValue()));
+                    node.setRight(removeHelp(node.getRight(), minNodeForRight.getValue()));
                 }
+                
             }
         }
         return node;

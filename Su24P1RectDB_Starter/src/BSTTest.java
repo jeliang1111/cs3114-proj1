@@ -88,11 +88,18 @@ public class BSTTest extends student.TestCase {
     /**
      * Tests the basic insert method
      */
-    public void testInsert() {
+    public void testInsertandDelete() {
         bst.insert("hello");
         assertEquals(1, bst.size());
         bst.insert("world");
         assertEquals(2, bst.size());
+        BSTNode<String> node = new BSTNode<String>("hello");
+        bst.remove(node);
+        assertEquals(1, bst.size());
+        node = new BSTNode<String>("world");
+        bst.remove(node);
+        assertEquals(0, bst.size());
     }
+
 
 }
