@@ -178,7 +178,7 @@ public class Database {
      */
     public void search(String name) {
         Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
-        bool firstFlag = false;
+        Boolean firstFlag = false;
         while(itr.hasNext()) {
         	BSTNode<KVPair<String, Rectangle>> node = itr.next();
         	if(node.getValue().getKey().equals(name)) {
