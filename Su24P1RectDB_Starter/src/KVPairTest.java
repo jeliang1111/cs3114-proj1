@@ -12,6 +12,9 @@ import student.TestCase;
 public class KVPairTest extends TestCase {
     private KVPair<String, Rectangle> pair;
 
+    /**
+     * Sets up the test fixture.
+     */
     public void setUp() {
         pair = new KVPair<String, Rectangle>("key", new Rectangle(0, 0, 10,
             10));

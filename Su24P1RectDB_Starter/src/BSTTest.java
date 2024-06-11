@@ -18,7 +18,7 @@ import student.TestCase;
  */
 public class BSTTest extends student.TestCase {
 
-    BST<String> bst;
+    private BST<String> bst;
 
     /**
      * setUp the condition.
@@ -33,9 +33,9 @@ public class BSTTest extends student.TestCase {
      * This defines an assertFuzzyContains method that you could use to test
      * your code
      * 
-     * @param m
-     * @param line
-     * @param substrs
+     * @param m     message
+     * @param line  line
+     * @param substrs   substrings
      */
     public void assertFuzzyContains(String m, String line, String... substrs) {
         assertTrue(m, fuzzyContains(line, substrs));
@@ -57,18 +57,6 @@ public class BSTTest extends student.TestCase {
     public void testBST() {
         assertEquals("empty BST size should be zero", 0, bst.size());
     }
-
-
-    /**
-     * Example 3: Test named incorrectly, does not work
-     */
-    public void BSTFailTest() {
-        // Despite this test asserting that false is true, a contradiction, it
-        // does not cause an error in JUnit, this is because the test case is
-        // incorrectly named, not starting with "test___"
-        assertTrue(false);
-    }
-
 
     /**
      * Example 4:
@@ -109,6 +97,9 @@ public class BSTTest extends student.TestCase {
         assertEquals(1, bst.size());
     }
 
+    /**
+     * Tests the basic insert method
+     */
     public void testNullminValNode() {
         BSTNode<String> node = new BSTNode<String>("hello");
 
@@ -118,7 +109,10 @@ public class BSTTest extends student.TestCase {
         assertEquals(node2, bst.minValueNode(node));
     }
 
-    public void testIterator(){
+    /**
+     * Tests to ensure that the iterator works properly
+     */
+    public void testIterator() {
         bst.insert("hello");
         bst.insert("world");
         bst.insert("hello");
@@ -133,9 +127,6 @@ public class BSTTest extends student.TestCase {
         assertTrue(iter.hasNext());
         assertEquals("world", iter.next().getValue());
         assertFalse(iter.hasNext());
-
-
-
 
     }
 

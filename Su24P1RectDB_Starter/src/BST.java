@@ -74,24 +74,28 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
         return node;
     }
 
+
     /**
      * Remove a node from the BST
      *
      * @param node
-     *            the current node to be removed
+     *            The current node to be removed
      */
 
-    public BSTNode<T> remove(BSTNode<T> node) {
-        return removeHelp(root, node.getValue(), new boolean[] {false});
+    public void remove(BSTNode<T> node) {
+        root = removeHelp(root, node.getValue(), new boolean[] { false });
     }
+
 
     /**
      * Remove a value from the BST helper function
      *
      * @param value
      *            the value to be removed
-     * @param node the current node
-     * @param removed flag to know if we removed and there are duplicates
+     * @param node
+     *            the current node
+     * @param removed
+     *            flag to know if we removed and there are duplicates
      */
     private BSTNode<T> removeHelp(BSTNode<T> node, T value, boolean[] removed) {
         if (node == null) {
@@ -103,15 +107,14 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
                 node.setLeft(removeHelp(node.getLeft(), value, removed));
             }
             else if (value.compareTo(node.getValue()) > 0) {
-                node.setRight(removeHelp(node.getRight()
-                , value, removed));
+                node.setRight(removeHelp(node.getRight(), value, removed));
             }
             else {
                 // Only remove if not already removed
                 if (!removed[0]) {
                     size--;
                     removed[0] = true; // Mark as removed
-    
+
                     if (node.getLeft() == null) {
                         return node.getRight();
                     }
@@ -119,18 +122,20 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
                         return node.getLeft();
                     }
                     else {
-                        BSTNode<T> minNodeForRight = minValueNode(node.getRight());
+                        BSTNode<T> minNodeForRight = minValueNode(node
+                            .getRight());
                         node.setValue(minNodeForRight.getValue());
                         // Pass the same removed flag
-                        node.setRight(removeHelp(node.getRight(), 
-                        minNodeForRight.getValue(), removed));
+                        node.setRight(removeHelp(node.getRight(),
+                            minNodeForRight.getValue(), removed));
                     }
                 }
             }
         }
         return node;
     }
-    
+
+
     /**
      * Find the minimum value node in the BST
      *

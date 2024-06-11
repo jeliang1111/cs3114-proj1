@@ -11,6 +11,9 @@ import student.TestCase;
 public class BSTNodeTest extends TestCase {
     private BSTNode<KVPair<String, Rectangle>> node;
 
+    /**
+     * Sets up the test fixture.
+     */
     public void setUp() {
         node = new BSTNode<KVPair<String, Rectangle>>(
             new KVPair<String, Rectangle>("A", new Rectangle(1, 2, 3, 4)));

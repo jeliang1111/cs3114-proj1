@@ -30,8 +30,6 @@ public class RectangleDBTest extends TestCase {
         return new String(encoded);
     }
 
-    // TODO: implement test methods
-
 
     /**
      * Example 1: Tests the main method when the file name is invalid.
@@ -62,31 +60,11 @@ public class RectangleDBTest extends TestCase {
 
         // Sets the test input file.
         // This file contains a list of commands to be executed.
-        String[] testInput = { "solutionTestData/SyntaxTest.txt" }; // Type is
-                                                                    // array of
-                                                                    // Strings
-                                                                    // to match
-                                                                    // the
-                                                                    // `main`
-                                                                    // argument
-        String testOutput = "solutionTestData/SyntaxTest_Output.txt"; // Type is
-                                                                      // String
-                                                                      // to
-                                                                      // match
-                                                                      // type of
-                                                                      // `readFile`
-                                                                      // method
+        String[] testInput = { "solutionTestData/SyntaxTest.txt" };
+        String testOutput = "solutionTestData/SyntaxTest_Output.txt";
 
-        // TODO Calls the main method of BST with the test input.
-        // This should print out all the necessary console output.
-        // The main method does NOT print anything console output right now
-        // because in its current state it is missing all the necessary methods.
-        // Those methods are for you to implement. :)
         RectangleDB.main(testInput);
 
-        // TODO Prints dummy console output.
-        // You can get rid of the next two statements when are done
-        // implementing methods that actual prints to the console output.
         String dummyConsoleOutput = "Rectangle rejected: (r_r, -1, -20, 3, 4)\n"
             + "Rectangle rejected: (rec, 7, -8, 1, 3)\n"
             + "Rectangle rejected: (virtual_rec0, 1, 1, 0, 0)\n"
@@ -98,15 +76,6 @@ public class RectangleDBTest extends TestCase {
             + "Rectangle not removed: (r_r)\n"
             + "Rectangle rejected: (1, 1, 0, 0)\n"
             + "Rectangles intersecting region (-5, -5, 20, 20):\n" + "";
-        // System.out.print(dummyConsoleOutput); // TODO: Comment it out later
-        // when
-        // you actually print to the
-        // console.
-
-        // TODO Sets the expected output.
-        // Change this to the file that contains expected output.
-        // Then, you can read the output file and set the expected output from
-        // that.
         String expected = readFile(testOutput);
 
         // asserts that the expected output matches the system output

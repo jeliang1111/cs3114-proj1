@@ -151,14 +151,7 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        // Check if any of the parameters are negative
-        if (xCoordinate < 0 || yCoordinate < 0 || width <= 0 || height <= 0)
-            return true;
-
-        // Check if the rectangle is out of bounds
-        if (xCoordinate + width > 1024 || yCoordinate + height > 1024)
-            return true;
-
-        return false;
+        return xCoordinate < 0 || yCoordinate < 0 || width <= 0 || height <= 0
+            || xCoordinate + width > 1024 || yCoordinate + height > 1024;
     }
 }

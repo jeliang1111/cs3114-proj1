@@ -53,7 +53,7 @@ public class Database {
             // error
             System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + pair.getValue().toString() + ")");
-                return;
+            return;
         }
         if (pair.getValue().getxCoordinate() + pair.getValue().getWidth() > 1024
             || pair.getValue().getyCoordinate() + pair.getValue()
@@ -61,13 +61,14 @@ public class Database {
             // error
             System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + pair.getValue().toString() + ")");
-                return;
+            return;
         }
-        if(pair.getValue().getWidth() <= 0 || pair.getValue().getHeight() <= 0) {
+        if (pair.getValue().getWidth() <= 0 || pair.getValue()
+            .getHeight() <= 0) {
             // error
             System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + pair.getValue().toString() + ")");
-                return;
+            return;
         }
         // check if the key has invalid characters
         // else add to tree
@@ -75,11 +76,13 @@ public class Database {
         // and underscore characters
         if (pair.getKey().matches("^[a-zA-Z][a-zA-Z0-9_]*$")) {
             tree.insert(pair);
+            System.out.println("Rectangle accepted: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
         }
         else {
             System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + pair.getValue().toString() + ")");
-                return;
+            return;
         }
 
     }
@@ -103,7 +106,7 @@ public class Database {
                 return;
             }
         }
-        System.out.println("Rectangle not found: (" + name +")");
+        System.out.println("Rectangle not found: (" + name + ")");
     }
 
 
@@ -121,6 +124,11 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
+        if (x + w <= x || y + h <= y) {
+            System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
+                + ", " + h + ")");
+            return;
+        }
         Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
         while (itr.hasNext()) {
             BSTNode<KVPair<String, Rectangle>> node = itr.next();
@@ -135,7 +143,7 @@ public class Database {
                 return;
             }
         }
-        System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
+        System.out.println("Rectangle not found: (" + x + ", " + y + ", " + w
             + ", " + h + ")");
 
     }
@@ -157,7 +165,7 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-        if ( x + w <= x || y + h <= y) {
+        if (x + w <= x || y + h <= y) {
             System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
                 + ", " + h + ")");
             return;

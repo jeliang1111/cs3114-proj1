@@ -1,3 +1,14 @@
+/**
+ * Stub for bst node
+ * We use generics here because we want the BST to be able to hold more than
+ * just Rectangles (or KVPairs)
+ * 
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-10
+ * @param <T>
+ *            the generic type; extends Comparable
+ */
 public class BSTNode<T extends Comparable<T>> {
     /** The left */
     private BSTNode<T> left;
@@ -26,9 +37,12 @@ public class BSTNode<T extends Comparable<T>> {
         return value;
     }
 
-
-    public T setValue(T value) {
-        return this.value = value;
+    /**
+     * Sets the value
+     * @param newValue the value
+     */
+    public void setValue(T newValue) {
+        this.value = newValue;
     }
 
 
