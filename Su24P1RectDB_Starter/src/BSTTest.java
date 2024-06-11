@@ -5,6 +5,8 @@
  */
 //
 
+import java.util.Iterator;
+
 import student.TestCase;
 
 // -------------------------------------------------------------------------
@@ -94,12 +96,47 @@ public class BSTTest extends student.TestCase {
         assertEquals(1, bst.size());
         bst.insert("world");
         assertEquals(2, bst.size());
+        bst.insert("hello");
+        bst.insert("helln");
         BSTNode<String> node = new BSTNode<String>("hello");
         bst.remove(node);
-        assertEquals(1, bst.size());
+        assertEquals(3, bst.size());
         node = new BSTNode<String>("world");
         bst.remove(node);
-        assertEquals(0, bst.size());
+        assertEquals(2, bst.size());
+        node = new BSTNode<String>("helln");
+        bst.remove(node);
+        assertEquals(1, bst.size());
+    }
+
+    public void testNullminValNode() {
+        BSTNode<String> node = new BSTNode<String>("hello");
+
+        assertEquals(node, bst.minValueNode(node));
+        BSTNode<String> node2 = new BSTNode<String>("helln");
+        node.setLeft(node2);
+        assertEquals(node2, bst.minValueNode(node));
+    }
+
+    public void testIterator(){
+        bst.insert("hello");
+        bst.insert("world");
+        bst.insert("hello");
+        bst.insert("helln");
+        Iterator<BSTNode<String>> iter = bst.iterator();
+        assertTrue(iter.hasNext());
+        assertEquals("helln", iter.next().getValue());
+        assertTrue(iter.hasNext());
+        assertEquals("hello", iter.next().getValue());
+        assertTrue(iter.hasNext());
+        assertEquals("hello", iter.next().getValue());
+        assertTrue(iter.hasNext());
+        assertEquals("world", iter.next().getValue());
+        assertFalse(iter.hasNext());
+
+
+
+
     }
 
 }

@@ -7,7 +7,9 @@ import java.util.Stack;
  * We use generics here because we want this BST to be able to hold more than
  * just Rectangles (or KVPairs)
  * 
- * @author {Your Name Here}
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-10
  * @param <T>
  *            the generic type; extends Comparable
  */
@@ -72,47 +74,71 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
         return node;
     }
 
+    /**
+     * Remove a node from the BST
+     *
+     * @param node
+     *            the current node to be removed
+     */
 
     public BSTNode<T> remove(BSTNode<T> node) {
-
-        return removeHelp(root, node.getValue());
-
+        return removeHelp(root, node.getValue(), new boolean[] {false});
     }
 
-
-    private BSTNode<T> removeHelp(BSTNode<T> node, T value) {
+    /**
+     * Remove a value from the BST helper function
+     *
+     * @param value
+     *            the value to be removed
+     * @param node the current node
+     * @param removed flag to know if we removed and there are duplicates
+     */
+    private BSTNode<T> removeHelp(BSTNode<T> node, T value, boolean[] removed) {
         if (node == null) {
             System.out.print("Node is null");
             return null;
         }
         else {
             if (value.compareTo(node.getValue()) < 0) {
-                node.setLeft(removeHelp(node.getLeft(), value));
+                node.setLeft(removeHelp(node.getLeft(), value, removed));
             }
             else if (value.compareTo(node.getValue()) > 0) {
-                node.setRight(removeHelp(node.getRight(), value));
+                node.setRight(removeHelp(node.getRight()
+                , value, removed));
             }
             else {
-                size--;
-                if (node.getLeft() == null) {
-                    return node.getRight();
-                }
-                else if (node.getRight() == null) {
-                    return node.getLeft();
-                }
-                else {
-                    BSTNode<T> minNodeForRight = minValueNode(node.getRight());
-                    node.setValue(minNodeForRight.getValue());
-                    node.setRight(removeHelp(node.getRight(), minNodeForRight
-                        .getValue()));
+                // Only remove if not already removed
+                if (!removed[0]) {
+                    size--;
+                    removed[0] = true; // Mark as removed
+    
+                    if (node.getLeft() == null) {
+                        return node.getRight();
+                    }
+                    else if (node.getRight() == null) {
+                        return node.getLeft();
+                    }
+                    else {
+                        BSTNode<T> minNodeForRight = minValueNode(node.getRight());
+                        node.setValue(minNodeForRight.getValue());
+                        // Pass the same removed flag
+                        node.setRight(removeHelp(node.getRight(), 
+                        minNodeForRight.getValue(), removed));
+                    }
                 }
             }
         }
         return node;
     }
-
-
-    private BSTNode<T> minValueNode(BSTNode<T> node) {
+    
+    /**
+     * Find the minimum value node in the BST
+     *
+     * @param node
+     *            the current node
+     * @return the minimum value node
+     */
+    public BSTNode<T> minValueNode(BSTNode<T> node) {
         BSTNode<T> current = node;
         while (current.getLeft() != null) {
             current = current.getLeft();
