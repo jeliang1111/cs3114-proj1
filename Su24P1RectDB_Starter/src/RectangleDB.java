@@ -29,7 +29,7 @@ public class RectangleDB {
 
         // Check if the command line arguments are correct
         if (args.length != 1) {
-            System.out.println("Usage: java RectangleDB <command-file>");
+            System.out.println("Invalid file");
             return;
         }
 
@@ -55,12 +55,16 @@ public class RectangleDB {
             CommandProcessor commandProcessor = new CommandProcessor(rectDB);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
+                // continue if line is empty
+                if (line.isEmpty()) {
+                    continue;
+                }
                 commandProcessor.processor(line);
             }
             scanner.close();
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("Invalid file");
         }
     }
 }

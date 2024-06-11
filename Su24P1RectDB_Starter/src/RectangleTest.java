@@ -18,6 +18,7 @@ public class RectangleTest extends TestCase {
         rect = new Rectangle(0, 0, 10, 10);
     }
 
+
     /**
      * Tests the setup, sanity check.
      */
@@ -28,6 +29,7 @@ public class RectangleTest extends TestCase {
         assertEquals(10, rect.getHeight());
         assertFalse(rect.isInvalid());
     }
+
 
     /**
      * Tests the isInvalid method.
@@ -48,6 +50,7 @@ public class RectangleTest extends TestCase {
         assertTrue(rect.isInvalid());
     }
 
+
     /**
      * Tests the intersect method.
      */
@@ -65,6 +68,7 @@ public class RectangleTest extends TestCase {
         assertFalse(rect.intersect(rect2));
         assertFalse(rect2.intersect(rect));
     }
+
 
     /**
      * Tests the equals method.

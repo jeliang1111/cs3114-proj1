@@ -47,19 +47,34 @@ public class CommandProcessor {
         // converts the string of the line into an
         // array of its space (" ") delimited elements
         String[] arr = line.split("\\s{1,}");
+        if (arr.length == 0) {
+            return;
+        }
         String command = arr[0]; // the command will be the first of these
                                  // elements
         // calls the insert function and passes the correct
         // parameters by converting the string integers into
         // their Integer equivalent, trimming the whitespace
+
+        // if there is unncessary white space in front, so 0 is null, skip
+        if (arr[0].equals("")) {
+            // delete the first element
+            String[] temp = new String[arr.length - 1];
+            for (int i = 0; i < temp.length; i++) {
+                temp[i] = arr[i + 1];
+            }
+            arr = temp;
+            command = arr[0];
+
+        }
         if (command.equals("insert")) {
-            if (arr.length != 5) {
+            if (arr.length != 6) {
                 System.out.println("Invalid number of parameters.");
                 return;
             }
-            Rectangle rect = new Rectangle(Integer.parseInt(arr[1].trim()),
-                Integer.parseInt(arr[2].trim()), Integer.parseInt(arr[3].trim()),
-                Integer.parseInt(arr[4].trim()));
+            Rectangle rect = new Rectangle(Integer.parseInt(arr[2].trim()),
+                Integer.parseInt(arr[3].trim()), Integer.parseInt(arr[4]
+                    .trim()), Integer.parseInt(arr[5].trim()));
             rectDB.insert(new KVPair<String, Rectangle>(arr[1], rect));
         }
         // calls the appropriate remove method based on the
@@ -74,17 +89,17 @@ public class CommandProcessor {
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string
                 // integers into their Integer equivalent minus whitespace
-                rectDB.remove(Integer.parseInt(arr[1].trim()),
-                    Integer.parseInt(arr[2].trim()), Integer.parseInt(arr[3].trim()),
-                    Integer.parseInt(arr[4].trim()));
+                rectDB.remove(Integer.parseInt(arr[1].trim()), Integer.parseInt(
+                    arr[2].trim()), Integer.parseInt(arr[3].trim()), Integer
+                        .parseInt(arr[4].trim()));
             }
 
         }
         else if (command.equals("regionsearch")) {
             // calls the regionsearch method for a set of coordinates
             // the string integers in the line will be trimmed of whitespace
-            rectDB.regionsearch(Integer.parseInt(arr[1].trim()),
-                Integer.parseInt(arr[2].trim()), Integer.parseInt(arr[3].trim()),
+            rectDB.regionsearch(Integer.parseInt(arr[1].trim()), Integer
+                .parseInt(arr[2].trim()), Integer.parseInt(arr[3].trim()),
                 Integer.parseInt(arr[4].trim()));
         }
         else if (command.equals("intersections")) {

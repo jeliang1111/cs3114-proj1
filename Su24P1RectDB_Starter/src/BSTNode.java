@@ -16,6 +16,7 @@ public class BSTNode<T extends Comparable<T>> {
         this.value = value;
     }
 
+
     /**
      * Gets the value
      * 
@@ -25,9 +26,11 @@ public class BSTNode<T extends Comparable<T>> {
         return value;
     }
 
+
     public T setValue(T value) {
         return this.value = value;
-    }   
+    }
+
 
     /**
      * Gets the left node
@@ -38,6 +41,7 @@ public class BSTNode<T extends Comparable<T>> {
         return left;
     }
 
+
     /**
      * Gets the right node
      * 
@@ -46,6 +50,7 @@ public class BSTNode<T extends Comparable<T>> {
     public BSTNode<T> getRight() {
         return right;
     }
+
 
     /**
      * Sets the left node
@@ -56,6 +61,7 @@ public class BSTNode<T extends Comparable<T>> {
     public void setLeft(BSTNode<T> left) {
         this.left = left;
     }
+
 
     /**
      * Sets the right node

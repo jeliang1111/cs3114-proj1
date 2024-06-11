@@ -69,12 +69,13 @@ public class RectangleDBTest extends TestCase {
                                                                     // the
                                                                     // `main`
                                                                     // argument
-        String testOutput = "solutionTestData/SyntaxTestOutput.txt"; // Type is
-                                                                     // String
-                                                                     // to match
-                                                                     // type of
-                                                                     // `readFile`
-                                                                     // method
+        String testOutput = "solutionTestData/SyntaxTest_Output.txt"; // Type is
+                                                                      // String
+                                                                      // to
+                                                                      // match
+                                                                      // type of
+                                                                      // `readFile`
+                                                                      // method
 
         // TODO Calls the main method of BST with the test input.
         // This should print out all the necessary console output.
@@ -97,9 +98,10 @@ public class RectangleDBTest extends TestCase {
             + "Rectangle not removed: (r_r)\n"
             + "Rectangle rejected: (1, 1, 0, 0)\n"
             + "Rectangles intersecting region (-5, -5, 20, 20):\n" + "";
-        System.out.print(dummyConsoleOutput); // TODO: Comment it out later when
-                                              // you actually print to the
-                                              // console.
+        // System.out.print(dummyConsoleOutput); // TODO: Comment it out later
+        // when
+        // you actually print to the
+        // console.
 
         // TODO Sets the expected output.
         // Change this to the file that contains expected output.

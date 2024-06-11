@@ -85,6 +85,7 @@ public class BSTTest extends student.TestCase {
          */
     }
 
+
     /**
      * Tests the basic insert method
      */
@@ -100,6 +101,5 @@ public class BSTTest extends student.TestCase {
         bst.remove(node);
         assertEquals(0, bst.size());
     }
-
 
 }

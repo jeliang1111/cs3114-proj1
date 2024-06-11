@@ -48,21 +48,38 @@ public class Database {
         // Delegates the decision mostly to BST, only
         // writing the correct message to the console from
         // that
-    	if(pair.getValue().getxCoordinate() < 0 || pair.getValue().getyCoordinate() < 0) {
-    		//error
-    		System.out.println("Rectangle rejected: (" + pair.getKey() + ", " + pair.getValue().toString() + ")");
-    	}
-    	if(pair.getValue().getxCoordinate() + pair.getValue().getWidth() > 1024 || pair.getValue().getyCoordinate() + pair.getValue().getHeight() > 1024) {
-    		//error
-    		System.out.println("Rectangle rejected: (" + pair.getKey() + ", " + pair.getValue().toString() + ")");
-    	}
-    	//check if the key has invalid characters 
-    	//else add to tree
-    	// The name must begin with a letter, and may contain letters, digits, and underscore characters
-        if(pair.getKey().matches("^[a-zA-Z][a-zA-Z0-9_]*$")) {
-        	tree.insert(pair);
-        } else {
-        	System.out.println("Rectangle rejected: (" + pair.getKey() + ", " + pair.getValue().toString() + ")");
+        if (pair.getValue().getxCoordinate() < 0 || pair.getValue()
+            .getyCoordinate() < 0) {
+            // error
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
+                return;
+        }
+        if (pair.getValue().getxCoordinate() + pair.getValue().getWidth() > 1024
+            || pair.getValue().getyCoordinate() + pair.getValue()
+                .getHeight() > 1024) {
+            // error
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
+                return;
+        }
+        if(pair.getValue().getWidth() <= 0 || pair.getValue().getHeight() <= 0) {
+            // error
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
+                return;
+        }
+        // check if the key has invalid characters
+        // else add to tree
+        // The name must begin with a letter, and may contain letters, digits,
+        // and underscore characters
+        if (pair.getKey().matches("^[a-zA-Z][a-zA-Z0-9_]*$")) {
+            tree.insert(pair);
+        }
+        else {
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
+                return;
         }
 
     }
@@ -77,15 +94,16 @@ public class Database {
      */
     public void remove(String name) {
         Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
-        while(itr.hasNext()) {
-        	BSTNode<KVPair<String, Rectangle>> node = itr.next();
-        	if(node.getValue().getKey().equals(name)) {
-        		tree.remove(node);
-                System.out.println("Rectangle removed: (" + name + ", " + node.getValue().getValue().toString() + ")");
-        		return;
-        	}
+        while (itr.hasNext()) {
+            BSTNode<KVPair<String, Rectangle>> node = itr.next();
+            if (node.getValue().getKey().equals(name)) {
+                tree.remove(node);
+                System.out.println("Rectangle removed: (" + name + ", " + node
+                    .getValue().getValue().toString() + ")");
+                return;
+            }
         }
-        System.out.println("Rectangle not found: " + name);
+        System.out.println("Rectangle not found: (" + name +")");
     }
 
 
@@ -104,15 +122,21 @@ public class Database {
      */
     public void remove(int x, int y, int w, int h) {
         Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
-        while(itr.hasNext()) {
-        	BSTNode<KVPair<String, Rectangle>> node = itr.next();
-        	if(node.getValue().getValue().getxCoordinate() == x && node.getValue().getValue().getyCoordinate() == y && node.getValue().getValue().getWidth() == w && node.getValue().getValue().getHeight() == h) {
-        		tree.remove(node);
-                System.out.println("Rectangle removed: (" + node.getValue().getKey() + ", " + node.getValue().getValue().toString() + ")");
-        		return;
-        	}
+        while (itr.hasNext()) {
+            BSTNode<KVPair<String, Rectangle>> node = itr.next();
+            if (node.getValue().getValue().getxCoordinate() == x && node
+                .getValue().getValue().getyCoordinate() == y && node.getValue()
+                    .getValue().getWidth() == w && node.getValue().getValue()
+                        .getHeight() == h) {
+                tree.remove(node);
+                System.out.println("Rectangle removed: (" + node.getValue()
+                    .getKey() + ", " + node.getValue().getValue().toString()
+                    + ")");
+                return;
+            }
         }
-        System.out.println("Rectangle not found: (" + x + ", " + y + ", " + w + ", " + h + ")");
+        System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
+            + ", " + h + ")");
 
     }
 
@@ -133,7 +157,29 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-
+        if ( x + w <= x || y + h <= y) {
+            System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
+                + ", " + h + ")");
+            return;
+        }
+        System.out.println("Rectangles intersecting region (" + x + ", " + y
+            + ", " + w + ", " + h + "):");
+        Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
+        while (itr.hasNext()) {
+            BSTNode<KVPair<String, Rectangle>> node = itr.next();
+            if (node.getValue().getValue().getxCoordinate() + node.getValue()
+                .getValue().getWidth() < x || node.getValue().getValue()
+                    .getxCoordinate() > x + w || node.getValue().getValue()
+                        .getyCoordinate() + node.getValue().getValue()
+                            .getHeight() < y || node.getValue().getValue()
+                                .getyCoordinate() > y + h) {
+                continue;
+            }
+            else {
+                System.out.println("(" + node.getValue().getKey() + ", " + node
+                    .getValue().getValue().toString() + ")");
+            }
+        }
     }
 
 
@@ -144,24 +190,36 @@ public class Database {
      * Rectangles.
      */
     public void intersections() {
-        System.out.println("Intersection Pairs:");
+        System.out.println("Intersection pairs:");
         Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
-        while(itr.hasNext()) {
+        while (itr.hasNext()) {
             BSTNode<KVPair<String, Rectangle>> node = itr.next();
-        	Iterator<BSTNode<KVPair<String, Rectangle>>> itr2 = tree.iterator();
-            while(itr2.hasNext()) {
+            Iterator<BSTNode<KVPair<String, Rectangle>>> itr2 = tree.iterator();
+            while (itr2.hasNext()) {
                 BSTNode<KVPair<String, Rectangle>> node2 = itr2.next();
-            	if(node2 == node) {
-            		continue;
-            	}
-                if(node.getValue().getValue().getxCoordinate() + node.getValue().getValue().getWidth() < node2.getValue().getValue().getxCoordinate() || 
-                node2.getValue().getValue().getxCoordinate() + node2.getValue().getValue().getWidth() < node.getValue().getValue().getxCoordinate() || 
-                node.getValue().getValue().getyCoordinate() + node.getValue().getValue().getHeight() < node2.getValue().getValue().getyCoordinate() || 
-                node2.getValue().getValue().getyCoordinate() + node2.getValue().getValue().getHeight() < node.getValue().getValue().getyCoordinate()) {
-                	continue;
+                if (node2 == node) {
+                    continue;
                 }
-                else{
-                    System.out.println("(" + node.getValue().getKey() + ", " + node.getValue().getValue().toString() + ") | (" + node2.getValue().getKey() + ", " + node2.getValue().getValue().toString() + ")");
+                if (node.getValue().getValue().getxCoordinate() + node
+                    .getValue().getValue().getWidth() < node2.getValue()
+                        .getValue().getxCoordinate() || node2.getValue()
+                            .getValue().getxCoordinate() + node2.getValue()
+                                .getValue().getWidth() < node.getValue()
+                                    .getValue().getxCoordinate() || node
+                                        .getValue().getValue().getyCoordinate()
+                                        + node.getValue().getValue()
+                                            .getHeight() < node2.getValue()
+                                                .getValue().getyCoordinate()
+                    || node2.getValue().getValue().getyCoordinate() + node2
+                        .getValue().getValue().getHeight() < node.getValue()
+                            .getValue().getyCoordinate()) {
+                    continue;
+                }
+                else {
+                    System.out.println("(" + node.getValue().getKey() + ", "
+                        + node.getValue().getValue().toString() + ") | ("
+                        + node2.getValue().getKey() + ", " + node2.getValue()
+                            .getValue().toString() + ")");
                 }
             }
         }
@@ -179,20 +237,21 @@ public class Database {
     public void search(String name) {
         Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
         Boolean firstFlag = false;
-        while(itr.hasNext()) {
-        	BSTNode<KVPair<String, Rectangle>> node = itr.next();
-        	if(node.getValue().getKey().equals(name)) {
-                if(!firstFlag) {
-                    System.out.println("Rectangles found matching \"" + name + "\": ");
+        while (itr.hasNext()) {
+            BSTNode<KVPair<String, Rectangle>> node = itr.next();
+            if (node.getValue().getKey().equals(name)) {
+                if (!firstFlag) {
+                    System.out.println("Rectangles found matching \"" + name
+                        + "\": ");
                     firstFlag = true;
                 }
-                System.out.println("(" + name + ", " + node.getValue().getValue().toString() + ")");
-        	}
+                System.out.println("(" + name + ", " + node.getValue()
+                    .getValue().toString() + ")");
+            }
         }
-        if(!firstFlag) {
-            System.out.println("Rectangle not found: " + name);
+        if (!firstFlag) {
+            System.out.println("Rectangle not found: (" + name + ")");
         }
-
 
     }
 
@@ -204,7 +263,18 @@ public class Database {
      */
     public void dump() {
         System.out.println("BST dump:");
-        
+        Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
+        if (!itr.hasNext()) {
+            System.out.println("Node has depth 0, Value (null)");
+        }
+        int depth = 0;
+        while (itr.hasNext()) {
+            BSTNode<KVPair<String, Rectangle>> node = itr.next();
+            System.out.println("Node has depth " + depth + ", Value (" + node
+                .getValue().getKey() + ", " + node.getValue().getValue()
+                    .toString() + ")");
+        }
+        System.out.println("BST size is: " + tree.size());
 
     }
 
