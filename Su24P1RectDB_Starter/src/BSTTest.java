@@ -13,8 +13,9 @@ import student.TestCase;
 /**
  * This class tests the methods of BST class
  *
- * @author CS Staff
- * @version 2024-05-22
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class BSTTest extends student.TestCase {
 
@@ -33,9 +34,12 @@ public class BSTTest extends student.TestCase {
      * This defines an assertFuzzyContains method that you could use to test
      * your code
      * 
-     * @param m     message
-     * @param line  line
-     * @param substrs   substrings
+     * @param m
+     *            message
+     * @param line
+     *            line
+     * @param substrs
+     *            substrings
      */
     public void assertFuzzyContains(String m, String line, String... substrs) {
         assertTrue(m, fuzzyContains(line, substrs));
@@ -57,6 +61,7 @@ public class BSTTest extends student.TestCase {
     public void testBST() {
         assertEquals("empty BST size should be zero", 0, bst.size());
     }
+
 
     /**
      * Example 4:
@@ -97,6 +102,7 @@ public class BSTTest extends student.TestCase {
         assertEquals(1, bst.size());
     }
 
+
     /**
      * Tests the basic insert method
      */
@@ -108,6 +114,7 @@ public class BSTTest extends student.TestCase {
         node.setLeft(node2);
         assertEquals(node2, bst.minValueNode(node));
     }
+
 
     /**
      * Tests to ensure that the iterator works properly
@@ -127,6 +134,18 @@ public class BSTTest extends student.TestCase {
         assertTrue(iter.hasNext());
         assertEquals("world", iter.next().getValue());
         assertFalse(iter.hasNext());
+
+    }
+
+
+    /**
+     * Tests the remove method
+     */
+    public void testMoreRemove() {
+        BSTNode<String> node = new BSTNode<String>("hello");
+        bst.remove(node);
+        assertEquals(0, bst.size());
+        assertTrue(fuzzyContains(systemOut().getHistory(), "node is null"));
 
     }
 

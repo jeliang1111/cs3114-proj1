@@ -4,9 +4,11 @@ import student.TestCase;
  * This class tests the KVPair class so that the member methods work properly
  * and that the expected behavior occurs.
  * 
- * @author CS Staff
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  * 
- * @version 2024-5-22
+ * 
  */
 public class BSTNodeTest extends TestCase {
     private BSTNode<KVPair<String, Rectangle>> node;

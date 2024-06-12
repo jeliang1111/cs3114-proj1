@@ -5,9 +5,9 @@ import student.TestCase;
  * This class tests the KVPair class so that the member methods work properly
  * and that the expected behavior occurs.
  * 
- * @author CS Staff
- * 
- * @version 2024.1
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class KVPairTest extends TestCase {
     private KVPair<String, Rectangle> pair;

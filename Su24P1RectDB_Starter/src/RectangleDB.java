@@ -12,8 +12,9 @@ import java.util.Scanner;
  * and creates the appropriate BST object and outputs the correct results
  * to the console as specified in the file.
  *
- * @author CS Staff
- * @version 2024-5-22
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class RectangleDB {
 

@@ -37,9 +37,12 @@ public class BSTNode<T extends Comparable<T>> {
         return value;
     }
 
+
     /**
      * Sets the value
-     * @param newValue the value
+     * 
+     * @param newValue
+     *            the value
      */
     public void setValue(T newValue) {
         this.value = newValue;

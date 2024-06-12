@@ -5,8 +5,9 @@ import student.TestCase;
  * This class tests the methods of Rectangle class,
  * ensuring that they work as they should.
  * 
- * @author <your_name>
- * @version <version_no>
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class RectangleTest extends TestCase {
     private Rectangle rect;
@@ -48,25 +49,6 @@ public class RectangleTest extends TestCase {
         assertTrue(rect.isInvalid());
         rect = new Rectangle(1020, 1020, 4, 5);
         assertTrue(rect.isInvalid());
-    }
-
-
-    /**
-     * Tests the intersect method.
-     */
-    public void testIntersect() {
-        Rectangle rect2 = new Rectangle(5, 5, 10, 10);
-        assertTrue(rect.intersect(rect2));
-        assertTrue(rect2.intersect(rect));
-        rect2 = new Rectangle(10, 10, 10, 10);
-        assertFalse(rect.intersect(rect2));
-        assertFalse(rect2.intersect(rect));
-        rect2 = new Rectangle(0, 10, 5, 5);
-        assertFalse(rect.intersect(rect2));
-        assertFalse(rect2.intersect(rect));
-        rect2 = new Rectangle(10, 0, 5, 5);
-        assertFalse(rect.intersect(rect2));
-        assertFalse(rect2.intersect(rect));
     }
 
 

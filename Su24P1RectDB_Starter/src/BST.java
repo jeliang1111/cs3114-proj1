@@ -9,7 +9,7 @@ import java.util.Stack;
  * 
  * @author Justin Liang jeliang1111
  * @author Timothy Palamarchuk timka3
- * @version 2024-06-10
+ * @version 2024-06-11
  * @param <T>
  *            the generic type; extends Comparable
  */
@@ -24,6 +24,7 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
      * Instantiates a new Binary Search Tree.
      */
     public BST() {
+        // stores the root node and size of the tree
         root = null;
         size = 0;
     }
@@ -60,10 +61,12 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
      */
     private BSTNode<T> insertHelp(BSTNode<T> node, T value) {
         if (node == null) {
+            // we are inserting a new node
             node = new BSTNode<T>(value);
             size++;
         }
         else {
+            // if node is on left, recurse left
             if (value.compareTo(node.getValue()) <= 0) {
                 node.setLeft(insertHelp(node.getLeft(), value));
             }
@@ -103,18 +106,20 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
             return null;
         }
         else {
+            // if value is less than current node, recurse left
             if (value.compareTo(node.getValue()) < 0) {
                 node.setLeft(removeHelp(node.getLeft(), value, removed));
             }
+            // if value is greater than current node, recurse right
             else if (value.compareTo(node.getValue()) > 0) {
                 node.setRight(removeHelp(node.getRight(), value, removed));
             }
+            // else this is the node we want to remove
             else {
                 // Only remove if not already removed
                 if (!removed[0]) {
                     size--;
                     removed[0] = true; // Mark as removed
-
                     if (node.getLeft() == null) {
                         return node.getRight();
                     }
@@ -122,6 +127,8 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
                         return node.getLeft();
                     }
                     else {
+                        // if 2 children exist, replace node with next in order
+                        // sequence
                         BSTNode<T> minNodeForRight = minValueNode(node
                             .getRight());
                         node.setValue(minNodeForRight.getValue());
@@ -160,12 +167,14 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
     @Override
     public Iterator<BSTNode<T>> iterator() {
         return new Iterator<BSTNode<T>>() {
-            private Stack<BSTNode<T>> stack = new Stack<>();
+            private Stack<KVPair<Integer, BSTNode<T>>> stack = new Stack<>();
 
             {
                 if (root != null) {
-                    stack.push(root);
-                    pushFarthestLeft(root.getLeft());
+                    KVPair<Integer, BSTNode<T>> rootPair =
+                        new KVPair<Integer, BSTNode<T>>(0, root);
+                    stack.push(rootPair);
+                    pushFarthestLeft(root.getLeft(), 0);
                 }
             }
 
@@ -180,21 +189,29 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                BSTNode<T> node = stack.pop();
+                KVPair<Integer, BSTNode<T>> pair = stack.pop();
+                BSTNode<T> node = pair.getValue();
+                int height = pair.getKey();
                 if (node.getRight() != null) {
-                    pushFarthestLeft(node.getRight());
+                    pushFarthestLeft(node.getRight(), height);
                 }
                 return node;
             }
 
 
-            private void pushFarthestLeft(BSTNode<T> node) {
+            private void pushFarthestLeft(BSTNode<T> node, int height) {
+                int newHeight = height + 1;
                 while (node != null) {
-                    stack.push(node);
+                    KVPair<Integer, BSTNode<T>> pair =
+                        new KVPair<Integer, BSTNode<T>>(newHeight, node);
+                    stack.push(pair);
                     node = node.getLeft();
+                    newHeight++;
                 }
             }
+
         };
+
     }
 
 }

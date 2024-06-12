@@ -4,9 +4,9 @@
  * There is also a toString method for easily translating the objects contained
  * in the KVPair into a human readable string.
  * 
- * @author CS Staff
- * 
- * @version 2024-05-22
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  * @param <K>
  *            Key to be used
  * @param <V>

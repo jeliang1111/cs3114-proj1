@@ -7,8 +7,9 @@ import student.TestCase;
  * Also test passing improper command to ensure
  * all class functionalities work as intended.
  * 
- * @author <your_name>
- * @version <version_no>
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class CommandProcessorTest extends TestCase {
     private CommandProcessor processor;
@@ -29,24 +30,25 @@ public class CommandProcessorTest extends TestCase {
      * Test the insert command.
      */
     public void testInsert() {
+        // testing command
         String command = "insert A 1 2 3 4";
         processor.processor(command);
         assertFuzzyEquals("Rectangle accepted: (A, 1, 2, 3, 4)", systemOut()
             .getHistory());
-        
+
         // Invalid inserts with negatives
         command = "insert A -1 2 3 4";
         processor.processor(command);
         String[] history = systemOut().getHistory().split("\n");
         String lastLine = history[history.length - 1];
         assertFuzzyEquals("Rectangle rejected: (A, -1, 2, 3, 4)", lastLine);
-        
+
         command = "insert A 1 -2 3 4";
         processor.processor(command);
         history = systemOut().getHistory().split("\n");
         lastLine = history[history.length - 1];
         assertFuzzyEquals("Rectangle rejected: (A, 1, -2, 3, 4)", lastLine);
-        
+
         command = "insert A 1 2 -3 4";
         processor.processor(command);
         history = systemOut().getHistory().split("\n");
@@ -58,20 +60,20 @@ public class CommandProcessorTest extends TestCase {
         history = systemOut().getHistory().split("\n");
         lastLine = history[history.length - 1];
         assertFuzzyEquals("Rectangle rejected: (A, 1, 2, 3, -4)", lastLine);
-        
+
         // Invalid inserts out of bounds
         command = "insert A 1 2 3 1024";
         processor.processor(command);
         history = systemOut().getHistory().split("\n");
         lastLine = history[history.length - 1];
         assertFuzzyEquals("Rectangle rejected: (A, 1, 2, 3, 1024)", lastLine);
-        
+
         command = "insert A 1 2 1024 4";
         processor.processor(command);
         history = systemOut().getHistory().split("\n");
         lastLine = history[history.length - 1];
         assertFuzzyEquals("Rectangle rejected: (A, 1, 2, 1024, 4)", lastLine);
-        
+
         // Invalid name
         command = "insert 1 1 2 3 4";
         processor.processor(command);
@@ -79,6 +81,7 @@ public class CommandProcessorTest extends TestCase {
         lastLine = history[history.length - 1];
         assertFuzzyEquals("Rectangle rejected: (1, 1, 2, 3, 4)", lastLine);
     }
+
 
     /**
      * Test the remove command.
@@ -98,7 +101,7 @@ public class CommandProcessorTest extends TestCase {
         history = systemOut().getHistory().split("\n");
         lastLine = history[history.length - 1];
         assertFuzzyEquals("Rectangle not found: (A)", lastLine);
-        
+
         command = "remove 1 2 3 4";
         processor.processor(command);
         history = systemOut().getHistory().split("\n");

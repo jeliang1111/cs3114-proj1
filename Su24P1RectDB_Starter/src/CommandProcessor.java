@@ -4,9 +4,9 @@ import java.util.regex.Pattern;
  * The purpose of this class is to parse a text file into its appropriate, line
  * by line commands for the format specified in the project spec.
  * 
- * @author CS Staff
- * 
- * @version 2024-05-22
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class CommandProcessor {
 

@@ -3,9 +3,9 @@
  * This class holds the coordinates and dimensions of a rectangle and methods to
  * check if it intersects or has the same coordinates as an other rectangle.
  * 
- * @author CS Staff
- * 
- * @version 2024-01-22
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class Rectangle {
     // the x coordinate of the rectangle
@@ -75,39 +75,6 @@ public class Rectangle {
      */
     public int getHeight() {
         return height;
-    }
-
-
-    /**
-     * Checks if the invoking rectangle intersects with rec.
-     * 
-     * @param r2
-     *            Rectangle parameter
-     * @return true if the rectangle intersects with rec, false if not
-     */
-    public boolean intersect(Rectangle r2) {
-        // this rectangle is to the left of r2
-        if (this.xCoordinate + this.width <= r2.getxCoordinate()) {
-            return false;
-        }
-
-        // this rectangle is to the right of r2
-        if (this.xCoordinate >= r2.getxCoordinate() + r2.getWidth()) {
-            return false;
-        }
-
-        // this rectangle is above r2
-        if (this.yCoordinate + this.height <= r2.getyCoordinate()) {
-            return false;
-        }
-
-        // this rectangle is below r2
-        if (this.yCoordinate >= r2.getyCoordinate() + r2.getHeight()) {
-            return false;
-        }
-
-        // if none of the above conditions are met, the rectangles intersect
-        return true;
     }
 
 

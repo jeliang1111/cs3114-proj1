@@ -10,9 +10,9 @@ import student.TestCase;
  * which serves as the entry point of the command line
  * program.
  * 
- * @author CS Staff
- * 
- * @version 2024-05-22
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class RectangleDBTest extends TestCase {
 

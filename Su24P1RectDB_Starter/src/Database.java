@@ -9,9 +9,9 @@ import java.util.Iterator;
  * Many of these methods will simply call the appropriate version of the
  * BST method after some preparation.
  * 
- * @author CS Staff
- * 
- * @version 2024-05-22
+ * @author Justin Liang jeliang1111
+ * @author Timothy Palamarchuk timka3
+ * @version 2024-06-11
  */
 public class Database {
 
@@ -124,7 +124,8 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
-        if (x + w <= x || y + h <= y) {
+        if (x + w <= x || y + h <= y || x < 0 || y < 0 || x + w > 1024 || y
+            + h > 1024) {
             System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
                 + ", " + h + ")");
             return;
@@ -173,6 +174,7 @@ public class Database {
         System.out.println("Rectangles intersecting region (" + x + ", " + y
             + ", " + w + ", " + h + "):");
         Iterator<BSTNode<KVPair<String, Rectangle>>> itr = tree.iterator();
+        // we check if the rectangle is outside of the region
         while (itr.hasNext()) {
             BSTNode<KVPair<String, Rectangle>> node = itr.next();
             if (node.getValue().getValue().getxCoordinate() + node.getValue()
@@ -208,18 +210,20 @@ public class Database {
                 if (node2 == node) {
                     continue;
                 }
+                // similar to the region search, we check if the rectangles are
+                // outside of each other
                 if (node.getValue().getValue().getxCoordinate() + node
-                    .getValue().getValue().getWidth() < node2.getValue()
+                    .getValue().getValue().getWidth() <= node2.getValue()
                         .getValue().getxCoordinate() || node2.getValue()
                             .getValue().getxCoordinate() + node2.getValue()
-                                .getValue().getWidth() < node.getValue()
+                                .getValue().getWidth() <= node.getValue()
                                     .getValue().getxCoordinate() || node
                                         .getValue().getValue().getyCoordinate()
                                         + node.getValue().getValue()
-                                            .getHeight() < node2.getValue()
+                                            .getHeight() <= node2.getValue()
                                                 .getValue().getyCoordinate()
                     || node2.getValue().getValue().getyCoordinate() + node2
-                        .getValue().getValue().getHeight() < node.getValue()
+                        .getValue().getValue().getHeight() <= node.getValue()
                             .getValue().getyCoordinate()) {
                     continue;
                 }
@@ -275,8 +279,8 @@ public class Database {
         if (!itr.hasNext()) {
             System.out.println("Node has depth 0, Value (null)");
         }
-        int depth = 0;
         while (itr.hasNext()) {
+            int depth = 0;
             BSTNode<KVPair<String, Rectangle>> node = itr.next();
             System.out.println("Node has depth " + depth + ", Value (" + node
                 .getValue().getKey() + ", " + node.getValue().getValue()
